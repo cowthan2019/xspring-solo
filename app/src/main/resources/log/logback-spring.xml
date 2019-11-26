@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoder 默认配置为PatternLayoutEncoder -->
+        <encoder>
+            <pattern>%d [%thread] %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="loglog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <FileNamePattern>log/loglog-%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <!-- each file should be at most 100MB, keep 60 days worth of history, but at most 20GB -->
+            <maxFileSize>100MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!-- <pattern>%d [%thread] %msg%n</pattern>-->
+            <pattern> %date %-5level %logger{0} - %message%n</pattern>
+        </layout>
+<!--        <filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+<!--            <level>INFO</level>-->
+<!--            <onMatch>ACCEPT</onMatch>-->
+<!--            <onMismatch>DENY</onMismatch>-->
+<!--        </filter>-->
+    </appender>
+
+<!--    <appender name="warn_log" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">-->
+<!--            &lt;!&ndash; rollover daily &ndash;&gt;-->
+<!--            <fileNamePattern>log/warn-%d{yyyy-MM-dd}.%i.log</fileNamePattern>-->
+<!--            &lt;!&ndash; each file should be at most 100MB, keep 60 days worth of history, but at most 20GB &ndash;&gt;-->
+<!--            <maxFileSize>20MB</maxFileSize>-->
+<!--            <maxHistory>180</maxHistory>-->
+<!--        </rollingPolicy>-->
+
+<!--        <layout class="ch.qos.logback.classic.PatternLayout">-->
+<!--            <pattern> %date %-5level %logger{0} - %message%n</pattern>-->
+<!--        </layout>-->
+<!--        <filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+<!--            <level>WARN</level>-->
+<!--            <onMatch>ACCEPT</onMatch>-->
+<!--            <onMismatch>DENY</onMismatch>-->
+<!--        </filter>-->
+<!--    </appender>-->
+<!--    <appender name="error_log" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">-->
+<!--            &lt;!&ndash; rollover daily &ndash;&gt;-->
+<!--            <fileNamePattern>log/error-%d{yyyy-MM-dd}.%i.log</fileNamePattern>-->
+<!--            &lt;!&ndash; each file should be at most 100MB, keep 60 days worth of history, but at most 20GB &ndash;&gt;-->
+<!--            <maxFileSize>20MB</maxFileSize>-->
+<!--            <maxHistory>180</maxHistory>-->
+<!--        </rollingPolicy>-->
+
+<!--        <layout class="ch.qos.logback.classic.PatternLayout">-->
+<!--            <pattern> %date %-5level %logger{0} - %message%n</pattern>-->
+<!--        </layout>-->
+<!--        <filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+<!--            <level>ERROR</level>-->
+<!--            <onMatch>ACCEPT</onMatch>-->
+<!--            <onMismatch>DENY</onMismatch>-->
+<!--        </filter>-->
+<!--    </appender>-->
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="loglog"/>
+<!--        <appender-ref ref="warn_log"/>-->
+<!--        <appender-ref ref="error_log"/>-->
+    </root>
+
+</configuration>
