@@ -1,6 +1,7 @@
 package com.danger;
 
 import com.danger.app.banner.dao.BannerDao;
+import com.danger.app.devconf.DevConfigDao;
 import com.danger.app.device.DeviceDao;
 import com.danger.app.user.dao.AuthDao;
 import com.danger.app.user.dao.UserProfileDao;
@@ -34,5 +35,10 @@ public class DaoFacade {
 
     @Autowired
     private BannerDao bannerDao;
+
+
+    @Autowired
+    private DevConfigDao devConfigDao;
+
 
 }

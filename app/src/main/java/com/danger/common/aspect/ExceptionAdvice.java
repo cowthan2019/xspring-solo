@@ -7,8 +7,7 @@ import org.cp4j.core.Lang;
 import org.cp4j.core.MD5Utils;
 import org.cp4j.core.MyResponse;
 import org.cp4j.core.response.LogicException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.cp4j.core.utils.Logs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
@@ -32,23 +31,16 @@ import java.util.UUID;
 
 /**
  *
- * 这个能干啥
- * HttpRequestMethodNotSupportedException
- *
  */
 @ControllerAdvice
 @ResponseBody
 public class ExceptionAdvice {
 
-    Logger logger = LoggerFactory.getLogger(this.getClass());
-
     @Autowired
     ErrorLogService logService;
 
     @ExceptionHandler(Exception.class)
-//    @ResponseStatus(code = HttpStatus.OK)
     public MyResponse logicException(Exception e) {
-        System.out.println("--------" + this.getClass().getSimpleName() + "--------");
 
         // 返回响应实体内容
         int code = 500;
@@ -61,11 +53,6 @@ public class ExceptionAdvice {
                 code = 400;
                 error = "参数缺失：" + e.getMessage();
             }
-//            else if(e instanceof MissingRequestHeaderException){
-//                //参数绑定错误
-//                code = 409;
-//                error = "header缺失：" + e.getMessage();
-//            }
         }else if(e instanceof ServletException){
             if(e instanceof MethodNotAllowedException){
                 code = 405;
@@ -112,7 +99,7 @@ public class ExceptionAdvice {
         }
 
         if(Lang.isEmpty(error)){
-            logger.error("遇到业务非预期异常", e);
+            Logs.error("遇到业务非预期异常", e);
             error = "服务器内部错误";
             code = 500;
             handleBadError(e);
@@ -176,7 +163,6 @@ public class ExceptionAdvice {
             }
         }catch (Exception e2){
             e2.printStackTrace();
-            reportError(log);
         }
 
         if(needReport){

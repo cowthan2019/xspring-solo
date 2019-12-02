@@ -238,3 +238,18 @@ CREATE TABLE `t_app_version` (
 INSERT INTO `t_app_version` (`id`, `platform`, `version_code`, `version_name`, `change_log`, `force`, `url`, `status`, `deleted`, `gmt_create`, `gmt_modified`)
 VALUES
 	(1, 'android', 1, 'v1.0.0', '么啥，改了个bug，引入了三个其他bug', 0, 'http://pingus.oss-cn-beijing.aliyuncs.com/cdn/app-debug.apk', 0, 0, '2019-11-25 20:27:27', '2019-11-25 20:27:53');
+
+
+DROP TABLE IF EXISTS `t_dev_config`;
+CREATE TABLE `t_dev_config` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `name` varchar(40) NOT NULL DEFAULT '' COMMENT 'key',
+  `val` varchar(300) NOT NULL DEFAULT '' COMMENT 'value',
+  `summary` varchar(100) NOT NULL DEFAULT '' COMMENT '字段描述',
+  `status` tinyint(3) NOT NULL DEFAULT 0 COMMENT '0正常 1禁用',
+  `deleted` tinyint(3) NOT NULL DEFAULT 0 COMMENT '0正常 1删除',
+  `gmt_create` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
+  `gmt_modified` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`id`) USING BTREE,
+    UNIQUE `idx_name`(`name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '开发者配置' ROW_FORMAT = Dynamic;

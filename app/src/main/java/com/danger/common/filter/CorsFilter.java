@@ -1,9 +1,6 @@
 package com.danger.common.filter;
 
 import com.danger.App;
-import com.danger.app.component.filter.ExceptionFilter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 
 import javax.servlet.*;
@@ -20,7 +17,6 @@ import java.io.IOException;
 @Order(1)
 public class CorsFilter  implements Filter {
 
-    private static final Logger logger = LoggerFactory.getLogger(ExceptionFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
